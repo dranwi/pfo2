@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+      http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+   version="2.0">
+  
+     <navigation-rule>
+        <from-view-id>/portfolioCreate.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>PORTFOLIO_CREATED</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ERROR</from-outcome>
+            <to-view-id>/message.xhtml</to-view-id>
+        </navigation-case>      
+    </navigation-rule>
+    
+     <navigation-rule>
+        <from-view-id>/stockCreate.xhtml</from-view-id>
+        <navigation-case>
+    		<from-outcome>STOCK_CREATED</from-outcome>   	
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+    		<from-outcome>ERROR</from-outcome>   	
+            <to-view-id>/message.xhtml</to-view-id>
+        </navigation-case>
+     </navigation-rule>    
+     
+     <navigation-rule>
+        <from-view-id>/portfolioManage.xhtml</from-view-id>
+        <navigation-case>
+    		<from-outcome>INCLUDE</from-outcome>   	
+            <to-view-id>/stockAdd.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+    		<from-outcome>BUY</from-outcome>   	
+            <to-view-id>/stockBuy.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+    		<from-outcome>SELL</from-outcome>   	
+            <to-view-id>/stockSell.xhtml</to-view-id>
+        </navigation-case>
+          <navigation-case>
+    		<from-outcome>GET_DATE</from-outcome>   	
+            <to-view-id>/portfolioDate.xhtml</to-view-id>
+        </navigation-case>  
+        <navigation-case>
+    		<from-outcome>ERROR</from-outcome>   	
+            <to-view-id>/message.xhtml</to-view-id>
+        </navigation-case>
+     </navigation-rule> 
+
+	 <navigation-rule>
+	 	<from-view-id>/portfolioDate.xhtml</from-view-id>
+	 	<navigation-case>
+	 		<from-outcome>DATE_OK</from-outcome>   	
+            <to-view-id>/portfolioView.xhtml</to-view-id>
+	 	</navigation-case>
+	 </navigation-rule>
+	 
+	 <navigation-rule>
+	 	<from-view-id>/allPortfoliosDate.xhtml</from-view-id>
+	 	<navigation-case>
+	 		<from-outcome>DATE_OK</from-outcome>   	
+            <to-view-id>/allPortfolios.xhtml</to-view-id>
+	 	</navigation-case>
+	 </navigation-rule>
+     
+     <navigation-rule>
+        <from-view-id>/stockAdd.xhtml</from-view-id>
+        <navigation-case>
+    		<from-outcome>OK</from-outcome>   	
+            <to-view-id>/stockAdd.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+    		<from-outcome>ERROR</from-outcome>   	
+            <to-view-id>/message.xhtml</to-view-id>
+        </navigation-case>
+     </navigation-rule> 
+     
+     <navigation-rule>
+        <from-view-id>/stockBuy.xhtml</from-view-id>
+        <navigation-case>
+    		<from-outcome>STOCK_BOUGHT</from-outcome>   	
+            <to-view-id>/portfolioManage.xhtml</to-view-id>
+        </navigation-case>
+ 	</navigation-rule> 
+ 	
+ 	<navigation-rule>
+        <from-view-id>/stockSell.xhtml</from-view-id>
+        <navigation-case>
+    		<from-outcome>STOCK_SOLD</from-outcome>   	
+            <to-view-id>/portfolioManage.xhtml</to-view-id>
+        </navigation-case>
+ 	</navigation-rule>
+ 	
+ 	<navigation-rule>
+        <from-view-id>/quoteCreate.xhtml</from-view-id>
+        <navigation-case>
+    		<from-outcome>QUOTE_CREATED</from-outcome>   	
+            <to-view-id>/quoteCreate.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+    		<from-outcome>QUOTE_UPDATED</from-outcome>   	
+            <to-view-id>/quoteCreate.xhtml</to-view-id>
+        </navigation-case>
+ 	</navigation-rule> 
+ 	
+ 	<navigation-rule>
+        <from-view-id>/currQuoteCreate.xhtml</from-view-id>
+        <navigation-case>
+    		<from-outcome>QUOTE_CREATED</from-outcome>   	
+            <to-view-id>/currQuoteCreate.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+    		<from-outcome>QUOTE_UPDATED</from-outcome>   	
+            <to-view-id>/currQuoteCreate.xhtml</to-view-id>
+        </navigation-case>
+ 	</navigation-rule> 
+ 	
+ 	<navigation-rule>
+     	<from-view-id>/quoteListSelect.xhtml</from-view-id>
+     	 <navigation-case>
+            <from-outcome>SELECTION_OK</from-outcome>
+            <to-view-id>/quoteListShow.xhtml</to-view-id>
+        </navigation-case>
+     </navigation-rule>
+    
+ 
+
+</faces-config>

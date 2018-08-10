@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<title>AllPortfoliosDate</title>
+	</h:head>
+	<h:body>
+		<h3>Set date for the portfolios</h3>
+		<h:form>
+			<p></p>
+			<h:panelGrid columns="6">
+				Year:
+				<h:inputText value="#{AllPortfoliosDateBean.year}"/>			
+				Month:
+				<h:inputText value="#{AllPortfoliosDateBean.month}"/>
+				Day:
+				<h:inputText value="#{AllPortfoliosDateBean.day}"/>
+			</h:panelGrid>	
+			
+			<p>		
+				<h:commandButton value="OK" action="#{AllPortfoliosDateBean.dateAction}" />
+			</p>
+ 
+			<p>		
+				<h:commandButton value="Return" action="index" />
+			</p>
+				
+		</h:form>		
+	</h:body>
+</html>

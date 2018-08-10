@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<h:outputStylesheet library="css"  name="styles.css" />	
+		<title>portfolioView</title>  			
+	</h:head>
+	<h:body>
+		<h:form>
+			<p></p>
+			<h:dataTable  value="#{PortfolioViewBean.tradeItemList}" var="item"
+				styleClass="stocks"
+				captionClass="stocksCaption"
+				headerClass="stocksHeader"
+				rowClasses="#{PortfolioViewBean.rowClasses}"
+				footerClass="stocksFooter"
+				columnClasses="column1, column2, column3, column4, column5, column6, column7, column8, column9, column10, column11, column12, column13, column14, column15, column16, column17, column18, column19">
+				
+				<f:facet name="caption"  >#{PortfolioViewBean.tableTitel}   </f:facet>
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Date</f:facet>
+					#{item.date}			
+				</h:column>
+								
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Trade</f:facet>
+					#{item.tradeType}		
+				</h:column>
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Symbol</f:facet>
+					#{item.symbol}	
+				</h:column>
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Currency</f:facet>
+					#{item.currency}	
+				</h:column>
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Amount</f:facet>
+					#{item.amount}		
+				</h:column>	
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">T.A.</f:facet>
+					#{item.totalAmount}		
+				</h:column>		
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Foreign TQ</f:facet>
+					#{item.forTradeQuote}
+				</h:column>	
+  				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Ex.R.</f:facet>
+					#{item.currQuote}
+				</h:column>				
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">TradeQuote</f:facet>
+					#{item.tradeQuote}
+				</h:column>
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Foreign PQ</f:facet>
+					#{item.presForQuote}
+				</h:column>
+								
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">PresQuote</f:facet>
+					#{item.presQuote}
+				</h:column>		
+								
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">TradeSum</f:facet>
+					#{item.tradeSum}
+				</h:column>	
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">T.T.S.</f:facet>
+					#{item.totalTradeSum}
+					<f:facet name="footer">#{PortfolioViewBean.pfoTotalTradeSum}</f:facet>
+				</h:column>
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">PresSum</f:facet>
+					#{item.presSum}
+				</h:column>	
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">T.P.S.</f:facet>
+					#{item.totalPresSum}
+					<f:facet name="footer">#{PortfolioViewBean.pfoTotalPresSum}</f:facet>
+				</h:column>	
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Profit</f:facet>
+					<h:outputText value="#{item.profit}" styleClass= "disBl #{item.profitInt lt 0 ? 'r' : 'dg'} "/>					
+				</h:column>	
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">Margin</f:facet>
+					<h:outputText value="#{item.margin}" styleClass= "disBl #{item.marginD lt 0 ? 'r' : 'dg'} "/>	
+				</h:column>	
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">T.Profit</f:facet>
+					<h:outputText value="#{item.totalProfit}" styleClass= "disBl #{item.totalProfitInt lt 0 ? 'r' : 'dg'} "/>	
+					<f:facet name="footer">
+						<h:outputText value="#{PortfolioViewBean.pfoTotalProfit}" styleClass= "disBl #{PortfolioViewBean.pfoTotalProfitD lt 0 ? 'r' : 'dg'} "/>
+					</f:facet>
+				</h:column>	
+				
+				<h:column headerClass="stocksHeader">
+					<f:facet name="header">T.Margin</f:facet>
+					<h:outputText value="#{item.totalMargin}" styleClass= "disBl #{item.totalMarginD lt 0 ? 'r' : 'dg'} "/>
+					<f:facet name="footer">
+						<h:outputText value="#{PortfolioViewBean.pfoTotalMargin}" styleClass= "disBl #{PortfolioViewBean.pfoTotalMarginD lt 0 ? 'r' : 'dg'} "/>
+					</f:facet>
+				</h:column>	
+				
+				
+			</h:dataTable>		
+			<p>		
+				<h:commandButton value="Return" action="index" />
+			</p>
+		</h:form>		
+	</h:body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<h:outputStylesheet library="css" name="styles.css" />
+		<title>quoteCreate</title>
+	</h:head>
+	<h:body>
+	
+		<h:form>
+			<h2>Please select a Symbol</h2>
+			<h:selectOneListbox value="#{CurrQuoteCreateBean.selectedSymbol}" size="5">
+				<f:selectItems value="#{CurrQuoteCreateBean.symbolList}" var="symbol"
+					itemLabel="#{symbol}" itemValue="#{symbol}"/>
+			</h:selectOneListbox>
+
+			<p></p>
+			<h:panelGrid columns="6">
+				Year:
+				<h:inputText value="#{CurrQuoteCreateBean.year}"/>			
+				Month:
+				<h:inputText value="#{CurrQuoteCreateBean.month}"/>
+				Day:
+				<h:inputText value="#{CurrQuoteCreateBean.day}"/>
+				Exchange rate:
+				<h:inputText value="#{CurrQuoteCreateBean.value}"/>
+			</h:panelGrid>	
+			
+			<p>		
+				<h:commandButton value="OK" action="#{CurrQuoteCreateBean.quoteAction}" />
+			</p>
+ 
+			<p>		
+				<h:commandButton value="Return" action="index" />
+			</p>
+				
+		</h:form>		
+	</h:body>
+</html>

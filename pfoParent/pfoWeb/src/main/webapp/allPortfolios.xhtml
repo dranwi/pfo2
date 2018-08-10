@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<h:outputStylesheet library="css"  name="styles.css" />	
+		<title>allPortfoliosView</title>  			
+	</h:head>
+	<h:body>
+  		<h:form>
+			<p></p>
+			<h:dataTable  value="#{AllPortfoliosBean.portfolioItemList}" var="item"
+				styleClass="portfolios"
+				captionClass="stocksCaption"
+				headerClass="stocksHeader"
+				rowClasses="#{AllPortfoliosBean.rowClasses}"
+				footerClass="stocksFooter"
+				columnClasses="column1, column2, column3, column4, column5 ">
+				
+				<f:facet name="caption">#{AllPortfoliosBean.tableTitel}  </f:facet>
+												
+				<h:column headerClass="portfoliosHeader">
+					<f:facet name="header">Portfolio</f:facet>
+					#{item.name}		
+				</h:column>
+								
+				<h:column headerClass="portfoliosHeader">
+					<f:facet name="header">TradeValue</f:facet>
+					#{item.tradeValue}
+					<f:facet name="footer">#{AllPortfoliosBean.totalTradeSum}</f:facet>
+				</h:column>	
+				
+				<h:column headerClass="portfoliosHeader">
+					<f:facet name="header">PresValue</f:facet>
+					#{item.presValue}
+					<f:facet name="footer">#{AllPortfoliosBean.totalPresSum}</f:facet>
+				</h:column>	
+				
+				<h:column headerClass="portfoliosHeader">
+					<f:facet name="header">Profit</f:facet>
+					<h:outputText value="#{item.profit}" styleClass= "disBl #{item.profitD lt 0 ? 'r' : 'dg'} "/>	
+					<f:facet name="footer">#{AllPortfoliosBean.totalProfit}</f:facet>				
+				</h:column>	
+				
+				<h:column headerClass="portfoliosHeader">
+					<f:facet name="header">Margin</f:facet>
+					<h:outputText value="#{item.margin}" styleClass= "disBl #{item.marginD lt 0 ? 'r' : 'dg'} "/>
+					<f:facet name="footer">#{AllPortfoliosBean.totalMargin}</f:facet>
+				</h:column>		
+				
+			</h:dataTable>		
+			<p>		
+				<h:commandButton value="Return" action="index" />
+			</p>
+		</h:form>				
+	</h:body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<h:outputStylesheet library="css" name="styles.css" />
+		<title>buyStock</title>
+	</h:head>
+	<h:body>
+	
+		<h:form>
+			<h2>Please select a stock</h2>
+			<h:selectOneListbox value="#{StockBuyBean.selectedStockName}">
+				<f:selectItems value="#{StockBuyBean.stockList}" var="stock"
+					itemLabel="#{stock.name}" itemValue="#{stock.name}"/>
+			</h:selectOneListbox>
+			<p></p>
+			Purchase Date
+			<p></p>
+			<h:panelGrid columns="2">
+				Year:
+				<h:inputText value="#{StockBuyBean.year}"/>			
+				Month:
+				<h:inputText value="#{StockBuyBean.month}"/>
+				Day:
+				<h:inputText value="#{StockBuyBean.day}"/>
+			</h:panelGrid>	
+			<p></p>
+			Purchase Data
+			<h:panelGrid columns="2">	
+				Quote:
+				<h:inputText value="#{StockBuyBean.quote}"/>
+				Foreign Quote:
+				<h:inputText value="#{StockBuyBean.forQuote}"/>
+				Amount:
+				<h:inputText value="#{StockBuyBean.amount}"/>				
+			</h:panelGrid>			
+			<p>		
+				<h:commandButton value="Buy Stock" action="#{StockBuyBean.stockBuyAction}" />
+			</p>
+ 
+			<p>		
+				<h:commandButton value="Return" action="portfolioManage" />
+			</p>
+				
+		</h:form>		
+	</h:body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<h:outputStylesheet library="css" name="styles.css" />
+		<title>portfolioManage</title>
+	</h:head>
+	<h:body>
+	
+		<h:form>
+			<h2>Please select a portfolio</h2>
+			<h:selectOneListbox value="#{PortfolioManageBean.selectedPortfolioName}">
+				<f:selectItems value="#{PortfolioManageBean.portfolioList}" var="pfo"
+					itemLabel="#{pfo.name}" itemValue="#{pfo.name}"/>
+			</h:selectOneListbox>
+			<p></p>
+			<h2>Please select an action</h2>							
+			<p>		
+				<h:commandButton value="Include Stock" action="#{PortfolioManageBean.includeStockAction}" />
+			</p>
+ 
+			<p>		
+				<h:commandButton value="Buy Stock" action="#{PortfolioManageBean.buyStockAction}" />
+			</p>
+			<p>		
+				<h:commandButton value="Sell Stock" action="#{PortfolioManageBean.sellStockAction}" />
+			</p>
+			<p>		
+				<h:commandButton value="View Portfolio" action="#{PortfolioManageBean.dateAction}" />
+			</p>
+			<p>		
+				<h:commandButton value="All Portfolios" action="allPortfoliosDate" />
+			</p>
+			<p>		
+				<h:commandButton value="Return" action="index" />
+			</p>
+				
+		</h:form>		
+	</h:body>
+</html>
