@@ -14,7 +14,7 @@ import com.andy.pfoEjb.session.PortfolioSession;
 import com.andy.pfoEjb.session.QuoteSession;
 import com.andy.pfoModel.CurrQuote;
 import com.andy.pfoModel.Portfolio;
-import com.andy.pfoModel.Purchase;
+//import com.andy.pfoModel.Purchase;
 import com.andy.pfoModel.Quote;
 import com.andy.pfoModel.Sale;
 import com.andy.pfoModel.Stock;
@@ -25,7 +25,7 @@ import com.andy.pfoWebHelper.ToStringConverter;
 @Named("AllPortfoliosBean")
 public class AllPortfoliosBean implements Serializable{
 	private static final long serialVersionUID = -5233445467221358790L;
-	private static Logger logger = Logger.getLogger("com.andy.portfolioWeb.AllPortfoliosBean"); 
+	private static Logger logger = Logger.getLogger("com.andy.pfoWeb.AllPortfoliosBean"); 
 	
 	List<PortfolioItem> portfolioItemList;
 	String rowClasses;
@@ -52,6 +52,7 @@ public class AllPortfoliosBean implements Serializable{
 	}
 	
 	public List<PortfolioItem> getPortfolioItemList() {
+		logger.info("getPortfolioItemList started");
 		Double totalTradeSumD = 0.0;
 		Double totalPresSumD = 0.0;
 		Double totalProfitD = 0.0;		
@@ -66,6 +67,9 @@ public class AllPortfoliosBean implements Serializable{
 			color = color * (-1);
 			portfolioItem.setName(p.getName());
 			List<Stock> stockList = p.getStockList();
+			logger.info("STOCKLIST SIZE BEFORE: " + stockList.size());
+			stockList.removeIf(x -> (x.getTradeList().size() == 0));
+			logger.info("STOCKLIST SIZE AFTER: " + stockList.size());
 			for (Stock s : stockList) {
 				String curr = s.getCurrency();
 				CurrQuote currQuote = null;
@@ -101,12 +105,7 @@ public class AllPortfoliosBean implements Serializable{
 				portfolioItem.addTradeValue(tradeSum);
 				portfolioItem.addPresValue(presValue);
 				portfolioItem.addInvestment(investSum);
-				
-/*				logger.info(s.getName() + " TRADESUM=" + tradeSum);
-				logger.info(s.getName()	+ " PRESVALUE=" + presValue);
-				logger.info(s.getName()	+ " INVESTSUM=" + investSum);
-				logger.info(s.getName()	+ " PROFIT=" + (presValue - tradeSum));
-*/				
+								
 				totalTradeSumD = totalTradeSumD + tradeSum;
 				totalPresSumD = totalPresSumD + presValue;
 				totalInvestSumD = totalInvestSumD + investSum;

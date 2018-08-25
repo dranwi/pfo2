@@ -15,7 +15,7 @@ import javax.persistence.Query;
 import org.jboss.logging.Logger;
 
 import com.andy.pfoModel.CurrQuote;
-import com.andy.pfoModel.Quote;
+//import com.andy.pfoModel.Quote;
 
 @Stateless
 public class CurrQuoteServiceImpl implements Serializable, CurrQuoteService {

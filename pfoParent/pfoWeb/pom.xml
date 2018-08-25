@@ -7,9 +7,10 @@
     <artifactId>pfoParent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
+
   <artifactId>pfoWeb</artifactId>
   <packaging>war</packaging>
-  
+
   <name>pfoWeb</name>
   <url>http://maven.apache.org</url>
   <properties>

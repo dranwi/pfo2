@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
-import javax.enterprise.context.Dependent;
+//import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -16,7 +16,7 @@ import javax.persistence.Query;
 import javax.ejb.TransactionAttributeType;
 
 import com.andy.pfoWebHelper.MessageBean;
-import com.andy.pfoWebHelper.ToStringConverter;
+//import com.andy.pfoWebHelper.ToStringConverter;
 import com.andy.pfoModel.Quote;
 
 @Stateless

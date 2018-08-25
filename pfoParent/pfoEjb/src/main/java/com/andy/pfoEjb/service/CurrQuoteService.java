@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.andy.pfoModel.CurrQuote;
-import com.andy.pfoModel.Quote;
+//import com.andy.pfoModel.Quote;
 
 @Local
 public interface CurrQuoteService {

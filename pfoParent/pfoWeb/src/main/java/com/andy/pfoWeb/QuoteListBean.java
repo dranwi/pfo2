@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javax.enterprise.context.RequestScoped;
+//import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.andy.pfoModel.Quote;
 import com.andy.pfoModel.Stock;
-import com.andy.pfoWebHelper.ToStringConverter;
+//import com.andy.pfoWebHelper.ToStringConverter;
 import com.andy.pfoEjb.session.CurrQuoteSession;
 import com.andy.pfoEjb.session.QuoteSession;
 import com.andy.pfoEjb.session.StockSession;

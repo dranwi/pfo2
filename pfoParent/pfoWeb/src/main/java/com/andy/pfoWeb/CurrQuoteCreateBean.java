@@ -8,12 +8,12 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.andy.pfoEjb.service.CurrQuoteService;
+//import com.andy.pfoEjb.service.CurrQuoteService;
 import com.andy.pfoEjb.session.CurrQuoteSession;
 import com.andy.pfoEjb.vd.CurrQuoteDetailVD;
-import com.andy.pfoEjb.vd.QuoteDetailVD;
+//import com.andy.pfoEjb.vd.QuoteDetailVD;
 import com.andy.pfoModel.CurrQuote;
-import com.andy.pfoModel.Quote;
+//import com.andy.pfoModel.Quote;
 import com.andy.pfoWebHelper.DateString;
 import com.andy.pfoWebHelper.FromStringConverter;
 

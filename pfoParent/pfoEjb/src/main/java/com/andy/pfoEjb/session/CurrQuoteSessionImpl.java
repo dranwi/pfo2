@@ -12,7 +12,7 @@ import javax.inject.Inject;
 
 import com.andy.pfoEjb.service.CurrQuoteService;
 import com.andy.pfoModel.CurrQuote;
-import com.andy.pfoModel.Quote;
+//import com.andy.pfoModel.Quote;
 
 @Stateless
 public class CurrQuoteSessionImpl implements CurrQuoteSession, Serializable {
