@@ -40,7 +40,7 @@ public class PfoValidator {
 		} catch (NumberFormatException ex) {
 			throw new ValidatorException( new FacesMessage("Incorrect year"));
 		}
-		if ((yearString.compareTo("2000") < 0) || (yearString.compareTo("2030") > 0) || (yearString.length() < 4)) {
+		if ((yearString.compareTo("2000") < 0) || (yearString.compareTo("2030") > 0) || (yearString.length() < 4) || (yearString.length() > 4)) {
 			throw new ValidatorException( new FacesMessage("Incorrect year"));
 		}		
 	}
