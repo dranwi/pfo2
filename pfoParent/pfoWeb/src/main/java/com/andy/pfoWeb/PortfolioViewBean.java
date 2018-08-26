@@ -69,10 +69,8 @@ public class PortfolioViewBean implements Serializable {
 		for (Stock s : stockList) {
 			Double presQuote = 0.0;
 			Double presForeignQuote = 0.0;
-			Double presCurrencyQuote = 0.0;
-			
-			boolean presQuoteFound = false;
-						
+			Double presCurrencyQuote = 0.0;			
+			boolean presQuoteFound = false;						
 			Integer totalAmount = 0;
 			Double totalTradeSum = 0.0;
 			Double totalPresSum = 0.0;
@@ -81,40 +79,28 @@ public class PortfolioViewBean implements Serializable {
 			Double totalBuySum = 0.0;
 
 			List<TradeItem> subTradeItemList = new ArrayList<TradeItem>();
-			
-			List<Trade> tradeList = s.getTradeList();
-			List<Trade> timedTradeList = tradeList
-										.stream()
-										.filter(t -> t.getDate().compareTo(referenceDate) <= 0)
-										.collect(Collectors.toList()); 
+			List<Trade> timedTradeList = s.getTradeList();
+			//Remove trades, which occurred after the reference date
+			timedTradeList.removeIf(t -> t.getDate().compareTo(referenceDate) > 0);
 
-			logger.info("PROCESSING: " + s.getName());
 			for (Trade t : timedTradeList) {
 				TradeItem item = new TradeItem();
-
 				// Date
 				item.setDate(t.getDate());
-
 				// Trade
 				String tType = (t instanceof Purchase) ? "BUY" : "SELL";
 				item.setTradeType(tType);
-
 				// Symbol
 				item.setSymbol(s.getName());
-
 				// Currency
 				item.setCurrency(s.getCurrency());
-
 				// Amount
 				Integer amount = t.getAmount();
 				if (t instanceof Sale) {
 					amount = amount * (-1);
 				}
-				String amountString = toStringConverter.fromInteger(amount);
-				item.setAmount(amountString);
-
 				totalAmount = totalAmount + amount;
-				
+				//PresQuote
 				if (!presQuoteFound) {
 					presQuote = this.findQuote(s.getName(), referenceDate);
 					
@@ -124,48 +110,28 @@ public class PortfolioViewBean implements Serializable {
 						presQuote = presQuote / presCurrencyQuote;
 					} else {
 						presForeignQuote = null;
-					}
-					
+					}					
 					presQuoteFound = true;
 				}
 								
-				if (s.isForeign()) {
-					
+				if (s.isForeign()) {					
 					//Foreign Trade Quote
-					String foreignTradeQuoteString = toStringConverter.fromDouble(t.getForQuote());
-					item.setForTradeQuote(foreignTradeQuoteString);
+					convertForeignTradeQuote(item, t);									
 					
 					//Exch.Rate for foreign trade
-					Double currencyQuote = t.getForQuote() /  t.getQuote() ;
-					String currencyQuoteString = toStringConverter.fromDouble4(currencyQuote);
-					item.setCurrQuote(currencyQuoteString);
+					Double currencyQuote = t.getForQuote() /  t.getQuote() ;	
+					convertCurrencyQuote(item, currencyQuote);											
 					
 					//Present Foreign Quote
-					String presForeignQuoteString = toStringConverter.fromDouble(presForeignQuote);
-					item.setPresForQuote(presForeignQuoteString);						
+					convertPresentForeignQuote(item, presForeignQuote);			
 				}
 
-				// TradeQuote
-				String tradeQuote = toStringConverter.fromDouble(t.getQuote());
-				item.setTradeQuote(tradeQuote);
-			
-				// Pres EUR Quote
-				String presQuoteString = toStringConverter.fromDouble(presQuote);
-				item.setPresQuote(presQuoteString);			
-				
-
 				// TradeSum
-				Double amountD = fromStringConverter.toDouble(item.getAmount());
-				logger.info("AMOUNT: " + amountD);
-				Double tradeSum = amountD * t.getQuote();
-				logger.info("TRADESUM: " + tradeSum);
-				String tradeSumString = toStringConverter.fromInteger(tradeSum.intValue());
-				logger.info("TRADESUM_STRING: " + tradeSumString);
-				item.setTradeSum(tradeSumString);
-
+				Double amountD = amount.doubleValue();
+				Double tradeSum = amount * t.getQuote();
 				totalTradeSum = totalTradeSum + tradeSum;
 				pfoTotalTradeSum = pfoTotalTradeSum + tradeSum;
-				
+
 				if(t instanceof Purchase) {
 					totalBuySum = totalBuySum + tradeSum;
 					pfoTotalBuySum = pfoTotalBuySum + tradeSum;
@@ -173,28 +139,28 @@ public class PortfolioViewBean implements Serializable {
 
 				// PresSum
 				Double presSum = amountD * presQuote;
-				String presSumString = toStringConverter.fromInteger(presSum.intValue());
-				item.setPresSum(presSumString);
-
 				totalPresSum = totalPresSum + presSum;
 				pfoTotalPresSum = pfoTotalPresSum + presSum;
-
 				// Profit
 				Double profit = presSum - tradeSum;
-				String profitString = toStringConverter.fromInteger(profit.intValue());
-				item.setProfit(profitString);
 				item.setProfitInt(profit.intValue());
-
 				// Margin
 				Double margin = profit / tradeSum;
 				if(t instanceof Sale) {
 					margin = margin * (-1.0);
 				}
-				String stringMargin = toStringConverter.fromMargin(margin);
-				item.setMargin(stringMargin);
 				item.setMarginD(margin);
 
 				subTradeItemList.add(item);
+				
+				convertAmount(item, amount);
+				convertTradeQuote(item, t);
+				convertPresentEurQuote(item,presQuote);
+				convertTradeSum(item,tradeSum);
+				convertPresentSum(item,presSum);
+				convertProfit(item,profit);
+				convertMargin(item,margin);
+				
 			}	//end Trade loop
 			
 			if (subTradeItemList.size() == 0) {
@@ -207,7 +173,7 @@ public class PortfolioViewBean implements Serializable {
 			subTradeItemList.sort(new TradeItemComparator());
 			TradeItem firstItem = subTradeItemList.get(0);
 
-			//Total Aount 
+			//Total Amount 
 			String totalAmountString = toStringConverter.fromInteger(totalAmount);
 			firstItem.setTotalAmount(totalAmountString);
 
@@ -241,6 +207,56 @@ public class PortfolioViewBean implements Serializable {
 		pfoTotalProfitString = toStringConverter.fromInteger(pfoTotalProfitD.intValue());
 		pfoTotalMarginString = toStringConverter.fromMargin(pfoTotalMarginD);
 		return tradeItemList;	
+	}
+	
+	private void convertAmount(TradeItem item, Integer amount) {
+		String amountString = toStringConverter.fromInteger(amount);	//
+		item.setAmount(amountString);									//
+	}
+	
+	private void convertForeignTradeQuote(TradeItem item, Trade trade) {
+		String foreignTradeQuoteString = toStringConverter.fromDouble(trade.getForQuote());		//
+		item.setForTradeQuote(foreignTradeQuoteString);										//
+	}
+	
+	private void convertCurrencyQuote(TradeItem item, Double currencyQuote) {
+		String currencyQuoteString = toStringConverter.fromDouble4(currencyQuote);			//
+		item.setCurrQuote(currencyQuoteString);												//
+	}
+	
+	private void convertPresentForeignQuote(TradeItem item, Double presForeignQuote) {
+		String presForeignQuoteString = toStringConverter.fromDouble(presForeignQuote);		//
+		item.setPresForQuote(presForeignQuoteString);										//	
+	}
+	
+	private void convertTradeQuote(TradeItem item, Trade trade) {
+		String tradeQuote = toStringConverter.fromDouble(trade.getQuote());							//
+		item.setTradeQuote(tradeQuote);															//
+	}
+	
+	private void convertPresentEurQuote(TradeItem item, Double presQuote) {
+		String presQuoteString = toStringConverter.fromDouble(presQuote);						//
+		item.setPresQuote(presQuoteString);	
+	}
+	
+	private void convertTradeSum(TradeItem item, Double tradeSum) {
+		String tradeSumString = toStringConverter.fromInteger(tradeSum.intValue());				//
+		item.setTradeSum(tradeSumString);														//
+	}
+	
+	private void convertPresentSum(TradeItem item, Double presSum) {
+		String presSumString = toStringConverter.fromInteger(presSum.intValue());				//
+		item.setPresSum(presSumString);															//
+	}
+	
+	private void convertProfit(TradeItem item, Double profit) {
+		String profitString = toStringConverter.fromInteger(profit.intValue());					//
+		item.setProfit(profitString);															//
+	}
+	
+	private void convertMargin(TradeItem item, Double margin) {
+		String stringMargin = toStringConverter.fromMargin(margin);								//
+		item.setMargin(stringMargin);															//
 	}
 	
 	public String getPfoTotalTradeSum() {

@@ -6,6 +6,8 @@ import java.util.List;
 //import java.util.logging.Logger;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,6 +15,7 @@ import com.andy.pfoModel.Quote;
 import com.andy.pfoModel.Stock;
 import com.andy.pfoWebHelper.DateString;
 import com.andy.pfoWebHelper.FromStringConverter;
+import com.andy.pfoWebHelper.PfoValidator;
 import com.andy.pfoEjb.session.QuoteSession;
 import com.andy.pfoEjb.session.StockSession;
 import com.andy.pfoEjb.vd.QuoteDetailVD;
@@ -33,6 +36,7 @@ public class QuoteCreateBean implements Serializable{
 	QuoteDetailVD quoteDetailVD;
 	
 	FromStringConverter fromStringConverter = new FromStringConverter();
+	PfoValidator validator = new PfoValidator();
 	
 	public QuoteCreateBean() {
 	}
@@ -72,6 +76,18 @@ public class QuoteCreateBean implements Serializable{
 			symbolList.add(stock.getName());
 		}
 		return symbolList;		
+	}
+	
+	public void validateYear(FacesContext fc, UIComponent c, Object value) {
+		validator.checkYear((String)value);		
+	}
+	
+	public void validateMonth(FacesContext fc, UIComponent c, Object value) {
+		validator.checkMonth((String)value);
+	}
+	
+	public void validateDay(FacesContext fc, UIComponent c, Object value) {
+		validator.checkDay((String) value);
 	}
 
 

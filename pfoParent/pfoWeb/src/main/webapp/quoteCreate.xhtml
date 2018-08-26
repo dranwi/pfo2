@@ -17,13 +17,22 @@
 			</h:selectOneListbox>
 
 			<p></p>
-			<h:panelGrid columns="6">
+			<h:panelGrid columns="9">
 				Year:
-				<h:inputText value="#{QuoteCreateBean.year}"/>			
+				<h:inputText id="year"  value="#{QuoteCreateBean.year}" validator="#{QuoteCreateBean.validateYear}">
+					<f:ajax event="blur" render="yearError"/>
+				</h:inputText>
+				<h:message for="year" id="yearError" style="color: red"/>				
 				Month:
-				<h:inputText value="#{QuoteCreateBean.month}"/>
+				<h:inputText id="month"  value="#{QuoteCreateBean.month}" validator="#{QuoteCreateBean.validateMonth}">
+					<f:ajax event="blur" render="monthError"/>
+				</h:inputText>
+				<h:message for="month" id="monthError" style="color: red"/>	
 				Day:
-				<h:inputText value="#{QuoteCreateBean.day}"/>
+				<h:inputText id="day"  value="#{QuoteCreateBean.day}" validator="#{QuoteCreateBean.validateDay}">
+					<f:ajax event="blur" render="dayError"/>
+				</h:inputText>
+				<h:message for="day" id="dayError" style="color: red"/>	
 				Value:
 				<h:inputText value="#{QuoteCreateBean.value}"/>
 			</h:panelGrid>	
