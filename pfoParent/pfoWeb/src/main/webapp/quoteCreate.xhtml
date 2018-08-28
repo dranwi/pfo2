@@ -11,13 +11,13 @@
 	
 		<h:form>
 			<h2>Please select a Symbol</h2>
-			<h:selectOneListbox value="#{QuoteCreateBean.selectedSymbol}" size="30">
+			<h:selectOneListbox value="#{QuoteCreateBean.selectedSymbol}" size="20">
 				<f:selectItems value="#{QuoteCreateBean.symbolList}" var="symbol"
 					itemLabel="#{symbol}" itemValue="#{symbol}"/>
 			</h:selectOneListbox>
 
 			<p></p>
-			<h:panelGrid columns="9">
+			<h:panelGrid columns="3">
 				Year:
 				<h:inputText id="year"  value="#{QuoteCreateBean.year}" validator="#{QuoteCreateBean.validateYear}">
 					<f:ajax event="blur" render="yearError"/>
@@ -34,17 +34,21 @@
 				</h:inputText>
 				<h:message for="day" id="dayError" style="color: red"/>	
 				Value:
-				<h:inputText value="#{QuoteCreateBean.value}"/>
+				<h:inputText id="value" value="#{QuoteCreateBean.value}" validator="#{QuoteCreateBean.validateValue}">
+					<f:ajax event="blur" render="valueError"/>
+				</h:inputText>
+				<h:message for="value" id="valueError" style="color: red"/>	
 			</h:panelGrid>	
 			
 			<p>		
 				<h:commandButton value="OK" action="#{QuoteCreateBean.quoteAction}" />
 			</p>
- 
+ 		</h:form>
+ 		<h:form>
 			<p>		
 				<h:commandButton value="Return" action="index" />
 			</p>
-				
 		</h:form>		
+				
 	</h:body>
 </html>

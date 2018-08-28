@@ -13,29 +13,42 @@
 			<h2>Please select a Symbol</h2>
 			<h:selectOneListbox value="#{CurrQuoteCreateBean.selectedSymbol}" size="5">
 				<f:selectItems value="#{CurrQuoteCreateBean.symbolList}" var="symbol"
-					itemLabel="#{symbol}" itemValue="#{symbol}"/>
+					itemLabel="#{symbol}" itemValue="#{symbol}"/>					
 			</h:selectOneListbox>
 
 			<p></p>
-			<h:panelGrid columns="6">
+			<h:panelGrid columns="3">
 				Year:
-				<h:inputText value="#{CurrQuoteCreateBean.year}"/>			
+				<h:inputText id="year"  value="#{CurrQuoteCreateBean.year}" validator="#{CurrQuoteCreateBean.validateYear}">
+					<f:ajax event="blur" render="yearError"/>
+				</h:inputText>
+				<h:message for="year" id="yearError" style="color: red"/>				
 				Month:
-				<h:inputText value="#{CurrQuoteCreateBean.month}"/>
+				<h:inputText id="month"  value="#{CurrQuoteCreateBean.month}" validator="#{CurrQuoteCreateBean.validateMonth}">
+					<f:ajax event="blur" render="monthError"/>
+				</h:inputText>
+				<h:message for="month" id="monthError" style="color: red"/>	
 				Day:
-				<h:inputText value="#{CurrQuoteCreateBean.day}"/>
-				Exchange rate:
-				<h:inputText value="#{CurrQuoteCreateBean.value}"/>
+				<h:inputText id="day"  value="#{CurrQuoteCreateBean.day}" validator="#{CurrQuoteCreateBean.validateDay}">
+					<f:ajax event="blur" render="dayError"/>
+				</h:inputText>
+				<h:message for="day" id="dayError" style="color: red"/>	
+				Value:
+				<h:inputText id="value" value="#{CurrQuoteCreateBean.value}" validator="#{CurrQuoteCreateBean.validateValue}">
+					<f:ajax event="blur" render="valueError"/>
+				</h:inputText>
+				<h:message for="value" id="valueError" style="color: red"/>	
 			</h:panelGrid>	
 			
 			<p>		
 				<h:commandButton value="OK" action="#{CurrQuoteCreateBean.quoteAction}" />
 			</p>
- 
+ 	</h:form>
+ 	<h:form>
 			<p>		
 				<h:commandButton value="Return" action="index" />
 			</p>
+	</h:form>			
 				
-		</h:form>		
 	</h:body>
 </html>

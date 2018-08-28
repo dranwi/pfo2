@@ -44,6 +44,9 @@ public class QuoteCreateBean implements Serializable{
 	
 	public String quoteAction() throws Exception {
 		String symbol = quoteDetailVD.getSymbol();
+		if(symbol == null) {
+			return "MISSING_STOCKSYMBOL";
+		}
 		String dateString = this.makeDate(quoteDetailVD);
 		Quote quote = quoteSession.findBySymbolAndDate(symbol, dateString);
 		Double value = fromStringConverter.toDouble(quoteDetailVD.getValue());
@@ -88,6 +91,10 @@ public class QuoteCreateBean implements Serializable{
 	
 	public void validateDay(FacesContext fc, UIComponent c, Object value) {
 		validator.checkDay((String) value);
+	}
+	
+	public void validateValue(FacesContext fc, UIComponent c, Object value) {
+		validator.checkQuote((String)value);		
 	}
 
 

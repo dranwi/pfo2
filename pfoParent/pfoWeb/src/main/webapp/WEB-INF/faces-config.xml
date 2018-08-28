@@ -107,6 +107,10 @@
     		<from-outcome>QUOTE_UPDATED</from-outcome>   	
             <to-view-id>/quoteCreate.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+    		<from-outcome>MISSING_STOCKSYMBOL</from-outcome>   	
+            <to-view-id>/errorQuoteCreate.xhtml</to-view-id>
+        </navigation-case>
  	</navigation-rule> 
  	
  	<navigation-rule>
@@ -118,6 +122,10 @@
          <navigation-case>
     		<from-outcome>QUOTE_UPDATED</from-outcome>   	
             <to-view-id>/currQuoteCreate.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+    		<from-outcome>MISSING_CURRENCY</from-outcome>   	
+            <to-view-id>/errorCurrQuoteCreate.xhtml</to-view-id>
         </navigation-case>
  	</navigation-rule> 
  	

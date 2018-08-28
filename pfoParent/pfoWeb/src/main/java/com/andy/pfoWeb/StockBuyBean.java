@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,6 +16,7 @@ import com.andy.pfoModel.Purchase;
 import com.andy.pfoModel.Stock;
 import com.andy.pfoWebHelper.DateString;
 import com.andy.pfoWebHelper.FromStringConverter;
+import com.andy.pfoWebHelper.PfoValidator;
 //import com.andy.pfoWebHelper.StringConverter;
 import com.andy.pfoEjb.session.StockSession;
 import com.andy.pfoEjb.vd.StockBuyDetailVD;
@@ -38,6 +41,7 @@ public class StockBuyBean implements Serializable{
 	Stock stock;
 	String buyDate;
 	FromStringConverter fromStringConverter = new FromStringConverter();
+	PfoValidator validator = new PfoValidator();
 	
 	public StockBuyBean() {
 	}
@@ -71,14 +75,32 @@ public class StockBuyBean implements Serializable{
 		return "STOCK_BOUGHT";
 	}
 	
-/*	boolean foreign(StockBuyDetailVD vd) {
-		if (vd.getCurrency().equals("EUR")) {
-			return false;
-		} else {
-			return true;
+	public void validateYear(FacesContext fc, UIComponent c, Object value) {
+		validator.checkYear((String)value);		
+	}
+	
+	public void validateMonth(FacesContext fc, UIComponent c, Object value) {
+		validator.checkMonth((String)value);
+	}
+	
+	public void validateDay(FacesContext fc, UIComponent c, Object value) {
+		validator.checkDay((String) value);
+	}
+	
+	public void validateQuote(FacesContext fc, UIComponent c, Object value) {
+		validator.checkQuote((String) value);
+	}
+	
+	public void validateForQuote(FacesContext fc, UIComponent c, Object value) {
+		if (value != null) {		
+			validator.checkQuote((String) value);
 		}
 	}
-*/
+	
+	public void validateAmount(FacesContext fc, UIComponent c, Object value) {
+		validator.checkAmount((String) value);
+	}
+	
 	String makeDate(StockBuyDetailVD vd) throws Exception{
 		String date;
 		String year = vd.getYear();

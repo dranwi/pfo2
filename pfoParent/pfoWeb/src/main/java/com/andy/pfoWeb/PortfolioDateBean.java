@@ -27,10 +27,9 @@ public class PortfolioDateBean implements Serializable{
 	PortfolioDateDetailVD portfolioDateDetailVD;
 	
 	String referenceDateString;
-	PfoValidator validator;
+	PfoValidator validator = new PfoValidator();
 	
 	public PortfolioDateBean() {
-		validator = new PfoValidator();
 	}
 	
 	public String dateAction() throws Exception{

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,6 +21,7 @@ import com.andy.pfoModel.Quote;
 import com.andy.pfoModel.Sale;
 import com.andy.pfoModel.Stock;
 import com.andy.pfoModel.Trade;
+import com.andy.pfoWebHelper.PfoValidator;
 import com.andy.pfoWebHelper.ToStringConverter;
 
 @SessionScoped
@@ -44,11 +47,12 @@ public class AllPortfoliosBean implements Serializable{
 	@Inject
 	CurrQuoteSession currQuoteSession;
 	
-	ToStringConverter converter;
+	ToStringConverter converter = new ToStringConverter();
+	PfoValidator validator = new PfoValidator();
 	
 	
 	public AllPortfoliosBean() {
-		converter = new ToStringConverter();
+		
 	}
 	
 	public List<PortfolioItem> getPortfolioItemList() {
@@ -145,6 +149,19 @@ public class AllPortfoliosBean implements Serializable{
 		rowClasses = sb.toString();	
 		logger.info("ALL PFO ROW_CLASSES: " + rowClasses);
 	}
+	
+	public void validateYear(FacesContext fc, UIComponent c, Object value) {
+		validator.checkYear((String)value);		
+	}
+	
+	public void validateMonth(FacesContext fc, UIComponent c, Object value) {
+		validator.checkMonth((String)value);
+	}
+	
+	public void validateDay(FacesContext fc, UIComponent c, Object value) {
+		validator.checkDay((String) value);
+	}
+
 	
 	public String getTableTitel() {
 		return "All Portfolios on " + referenceDate;

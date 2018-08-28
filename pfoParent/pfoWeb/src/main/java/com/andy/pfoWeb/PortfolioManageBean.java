@@ -88,7 +88,7 @@ public class PortfolioManageBean implements Serializable {
 		this.findPortfolio();
 		if (selectedPortfolio == null) {
 			return "ERROR";
-		}
+		}		
 		System.out.println("FOUND SELECTED PORTFOLIO WITH NAME:" + selectedPortfolio.getName());
 		return "VIEW";
 	}
@@ -96,7 +96,7 @@ public class PortfolioManageBean implements Serializable {
 	private void findPortfolio() {
 		try {
 			selectedPortfolio = portfolioSession.findByName(selectedPortfolioName);
-			//portfolioViewBean.setPortfolio(selectedPortfolio);
+			selectedPortfolioName = null;
 		} catch (Exception ex) {
 			System.out.println("NO SELECTED PORTFOLIO FOUND");
 		}

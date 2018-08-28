@@ -10,19 +10,29 @@
 		<h3>Set date for the portfolios</h3>
 		<h:form>
 			<p></p>
-			<h:panelGrid columns="6">
+			<h:panelGrid columns="3">
 				Year:
-				<h:inputText value="#{AllPortfoliosDateBean.year}"/>			
+				<h:inputText id="year"  value="#{AllPortfoliosDateBean.year}" validator="#{AllPortfoliosDateBean.validateYear}">
+					<f:ajax event="blur" render="yearError"/>
+				</h:inputText>
+				<h:message for="year" id="yearError" style="color: red"/>				
 				Month:
-				<h:inputText value="#{AllPortfoliosDateBean.month}"/>
+				<h:inputText id="month"  value="#{AllPortfoliosDateBean.month}" validator="#{AllPortfoliosDateBean.validateMonth}">
+					<f:ajax event="blur" render="monthError"/>
+				</h:inputText>
+				<h:message for="month" id="monthError" style="color: red"/>	
 				Day:
-				<h:inputText value="#{AllPortfoliosDateBean.day}"/>
-			</h:panelGrid>	
+				<h:inputText id="day"  value="#{AllPortfoliosDateBean.day}" validator="#{AllPortfoliosDateBean.validateDay}">
+					<f:ajax event="blur" render="dayError"/>
+				</h:inputText>
+				<h:message for="day" id="dayError" style="color: red"/>	
+			</h:panelGrid>		
 			
 			<p>		
 				<h:commandButton value="OK" action="#{AllPortfoliosDateBean.dateAction}" />
 			</p>
- 
+ 		</h:form>
+ 		<h:form>
 			<p>		
 				<h:commandButton value="Return" action="index" />
 			</p>

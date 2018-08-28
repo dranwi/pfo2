@@ -18,28 +18,47 @@
 			<p></p>
 			Sale Date
 			<p></p>
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="3">
 				Year:
-				<h:inputText value="#{StockSellBean.year}"/>			
+				<h:inputText id="year" value="#{StockSellBean.year}" validator="#{StockSellBean.validateYear}">
+					<f:ajax event="blur" render="yearError"/>
+				</h:inputText>
+				<h:message for="year" id="yearError" style="color: red"/>				
 				Month:
-				<h:inputText value="#{StockSellBean.month}"/>
+				<h:inputText id="month" value="#{StockSellBean.month}" validator="#{StockSellBean.validateMonth}">
+					<f:ajax event="blur" render="monthError"/>
+				</h:inputText>
+				<h:message for="month" id="monthError" style="color: red"/>	
 				Day:
-				<h:inputText value="#{StockSellBean.day}"/>
-			</h:panelGrid>	
+				<h:inputText id="day" value="#{StockSellBean.day}" validator="#{StockSellBean.validateDay}">
+					<f:ajax event="blur" render="dayError"/>
+				</h:inputText>
+				<h:message for="day" id="dayError" style="color: red"/>		
+			</h:panelGrid>		
 			<p></p>
 			Sale Data
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="3">	
 				Quote:
-				<h:inputText value="#{StockSellBean.quote}"/>
+				<h:inputText id="quote" value="#{StockSellBean.quote}" validator="#{StockSellBean.validateQuote}">
+					<f:ajax event="blur" render="quoteError"/>
+				</h:inputText>
+				<h:message for="quote" id="quoteError" style="color: red"/>
 				Foreign Quote:
-				<h:inputText value="#{StockSellBean.forQuote}"/>
+				<h:inputText id="forQuote" value="#{StockSellBean.forQuote}" validator="#{StockSellBean.validateForQuote}">
+					<f:ajax event="blur" render="forQuoteError"/>
+				</h:inputText>
+				<h:message for="forQuote" id="forQuoteError" style="color: red"/>
 				Amount:
-				<h:inputText value="#{StockSellBean.amount}"/>						
-			</h:panelGrid>			
+				<h:inputText id="value" value="#{StockSellBean.amount}" validator="#{StockSellBean.validateAmount}">	
+					<f:ajax event="blur" render="amountError"/>
+				</h:inputText>
+				<h:message for="value" id="amountError" style="color: red"/>			
+			</h:panelGrid>				
 			<p>		
 				<h:commandButton value="Sell Stock" action="#{StockSellBean.stockSellAction}" />
 			</p>
- 
+ 		</h:form>
+ 		<h:form>
 			<p>		
 				<h:commandButton value="Return" action="portfolioManage" />
 			</p>

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,6 +18,7 @@ import com.andy.pfoModel.CurrQuote;
 //import com.andy.pfoModel.Quote;
 import com.andy.pfoWebHelper.DateString;
 import com.andy.pfoWebHelper.FromStringConverter;
+import com.andy.pfoWebHelper.PfoValidator;
 
 
 @Named("CurrQuoteCreateBean")
@@ -30,11 +33,15 @@ public class CurrQuoteCreateBean implements Serializable {
 	CurrQuoteDetailVD currQuoteDetailVD;
 	
 	FromStringConverter fromStringConverter = new FromStringConverter();
+	PfoValidator validator = new PfoValidator();
 	
 	public CurrQuoteCreateBean() {}
 		
 	public String quoteAction() throws Exception {
 		String symbol = currQuoteDetailVD.getSymbol();
+		if(symbol == null) {
+			return "MISSING_CURRENCY";
+		}
 		String dateString = this.makeDate(currQuoteDetailVD);
 		CurrQuote quote = currQuoteSession.findBySymbolAndDate(symbol, dateString);
 		Double value = fromStringConverter.toDouble(currQuoteDetailVD.getValue());
@@ -58,6 +65,22 @@ public class CurrQuoteCreateBean implements Serializable {
 		String day = vd.getDay();
 		String dateString = new DateString(day,month,year).getString();
 		return dateString;
+	}
+	
+	public void validateYear(FacesContext fc, UIComponent c, Object value) {
+		validator.checkYear((String)value);		
+	}
+	
+	public void validateMonth(FacesContext fc, UIComponent c, Object value) {
+		validator.checkMonth((String)value);
+	}
+	
+	public void validateDay(FacesContext fc, UIComponent c, Object value) {
+		validator.checkDay((String) value);
+	}
+	
+	public void validateValue(FacesContext fc, UIComponent c, Object value) {
+		validator.checkQuote((String)value);		
 	}
 	
 	public List<String> getSymbolList() {

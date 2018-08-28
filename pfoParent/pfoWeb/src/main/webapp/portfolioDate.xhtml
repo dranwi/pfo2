@@ -10,7 +10,7 @@
 		<h3>Set date for the portfolio state</h3>
 		<h:form>
 			<p></p>
-			<h:panelGrid columns="9">
+			<h:panelGrid columns="3">
 				Year:
 				<h:inputText id="year" value="#{PortfolioDateBean.year}" validator="#{PortfolioDateBean.validateYear}">	
 					<f:ajax event="blur" render="yearError"/>
@@ -34,7 +34,8 @@
 			<p>		
 				<h:commandButton value="OK" action="#{PortfolioDateBean.dateAction}" />
 			</p>
- 
+ 		</h:form>
+ 		<h:form>
 			<p>		
 				<h:commandButton value="Return" action="index" />
 			</p>
